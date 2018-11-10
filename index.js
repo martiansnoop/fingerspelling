@@ -20,21 +20,19 @@ function displayWord() {
     const word = getRandomWord(words);
     const letters = word.split("");
     const wrapper = document.getElementById("image-wrapper");
-
-    const functions = [];
-    for (let i = 0; i < letters.length; i++) {
-        const displayFn = () => {
-            const letter = letters[i];
-            const newImg = imagesByLetter[letter];
-            if (wrapper.children.length > 0) {
-                wrapper.removeChild(wrapper.children[0]);
-            }
-            wrapper.appendChild(newImg);
+    displayLetter(0);
+    function displayLetter(index) {
+        console.log("displayLetter", index, letters[index]);
+        const letter = letters[index];
+        const newImg = imagesByLetter[letter];
+        if (wrapper.children.length > 0) {
+            wrapper.removeChild(wrapper.children[0]);
         }
-        functions.push(displayFn);
+        wrapper.appendChild(newImg);
+        if (index < word.length - 1) {
+            setTimeout(() => displayLetter(index+1), intervalMillis);
+        }
     }
-
-
 }
 
 
