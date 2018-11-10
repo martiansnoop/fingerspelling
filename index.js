@@ -10,9 +10,13 @@ const words = ["foo", "bar", "baz"];
 const intervalMillis = 2000;
 
 const imagesByLetter = getImagesByLetter();
-document.getElementById("start-button").addEventListener("click", function(event) {
+const startButton = document.getElementById("start-button");
+startButton.focus();
+
+startButton.addEventListener("click", function(event) {
     displayWord();
 });
+
 
 function getImagesByLetter() {
     const letters = "abcdefghijklmnopqrstuvwxyz".split("");
