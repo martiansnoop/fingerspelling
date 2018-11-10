@@ -1,8 +1,18 @@
+// user enters page, and indicates they want to start playing
+// select a random word and display it
+// once the word is finished playing, direct focus to a textbox so user can guess
+// Allow user to skip to next word
+// keep track of correct, correct on first try, skipped
+// also would be fun to track all time vs this session
+//
+
 const words = ["foo", "bar", "baz"];
 const intervalMillis = 2000;
 
 const imagesByLetter = getImagesByLetter();
-displayWord();
+document.getElementById("start-button").addEventListener("click", function(event) {
+    displayWord();
+});
 
 function getImagesByLetter() {
     const letters = "abcdefghijklmnopqrstuvwxyz".split("");
