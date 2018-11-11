@@ -7,16 +7,30 @@
 //
 
 const words = ["foo", "bar", "baz"];
-const intervalMillis = 2000;
+let intervalMillis = 1000;
+let currentWord = getRandomWord(words);
 
 const imagesByLetter = getImagesByLetter();
 const startButton = document.getElementById("start-button");
-startButton.focus();
+const guessInput = document.getElementById("guess-input");
+const checkButton = document.getElementById("check-button");
+const guessForm = document.getElementById("guess-form");
 
+startButton.focus();
 startButton.addEventListener("click", function(event) {
-    displayWord();
+    displayWord(currentWord);
 });
 
+guessForm.addEventListener("submit", function(event) {
+    event.preventDefault();
+    const guess = guessInput.value;
+    if (guess === currentWord) {
+        console.log("Success!");
+    } else {
+        console.log("Try again.");
+        // move focus to a nextWord button.
+    }
+});
 
 function getImagesByLetter() {
     const letters = "abcdefghijklmnopqrstuvwxyz".split("");
@@ -30,8 +44,7 @@ function getImagesByLetter() {
     return imagesByLetter;
 }
 
-function displayWord() {
-    const word = getRandomWord(words);
+function displayWord(word) {
     const letters = word.split("");
     const wrapper = document.getElementById("image-wrapper");
     displayLetter(0);
@@ -43,9 +56,15 @@ function displayWord() {
             wrapper.removeChild(wrapper.children[0]);
         }
         wrapper.appendChild(newImg);
+        // TODO in between removing the old image and inserting the new one,
+        // display something else so you can distinguish double letters.
         if (index < word.length - 1) {
             setTimeout(() => displayLetter(index+1), intervalMillis);
+        } else {
+            // The complete word has been displayed, so move focus to the guess input
+            guessInput.focus();
         }
+
     }
 }
 
