@@ -11,10 +11,19 @@
         7. keep track of correct/incorrect guesses and stuff
     -->
     <body>
-    <h1>This is a header</h1>
-    <div id="image-wrapper"></div>
-    <button id="start-button">Start</button>
-    
-    <script type="text/javascript" src="index.js"></script>
+        <h1>This is a header</h1>
+        <div id="image-wrapper"></div>
+        <button id="start-button">Start</button>
+
+        <script type="text/javascript" src="index.js"></script>
+        <script type="text/javascript"> 
+            if ("serviceWorker" in navigator) {
+                window.addEventListener("load", function(event) {
+                    navigator.serviceWorker.register("sw.js")
+                        .then(registration => console.log("registered service worker", registration))
+                        .catch(error => console.log("error registering service worker", error));
+                });
+            }
+        </script>
     </body>
 </html>
