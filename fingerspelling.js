@@ -59,6 +59,7 @@ guessForm.addEventListener("submit", function(event) {
     if (success) {
         console.log("Success!");
         successIndicator.style.display = "block"
+        nextWordButton.focus();
     } else {
         console.log("Try again.");
         failureIndicator.style.display = "block"
