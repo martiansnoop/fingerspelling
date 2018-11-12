@@ -62,7 +62,8 @@ function displayWord(word) {
             setTimeout(() => displayLetter(index+1), intervalMillis);
         } else {
             // The complete word has been displayed, so move focus to the guess input
-            guessInput.focus();
+            // use a timeout here too so user can see the last letter for the full interval
+            setTimeout(() => guessInput.focus(), intervalMillis);
         }
 
     }
