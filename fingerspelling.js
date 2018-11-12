@@ -33,7 +33,6 @@ nextWordButton.addEventListener("click", function(event) {
     displayWord(currentWord);
 });
 
-
 guessForm.addEventListener("submit", function(event) {
     event.preventDefault();
     const guess = guessInput.value;
