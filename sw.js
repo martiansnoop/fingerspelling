@@ -1,5 +1,6 @@
 const cacheName = "cache-v1";
 const urlsToCache = [
+    "words.txt",
 	"images/a.gif",
 	"images/b.gif",
 	"images/c.gif",

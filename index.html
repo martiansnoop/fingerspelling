@@ -6,13 +6,13 @@
     </head>
     <body>
         <div id="image-wrapper"></div>
-        <button id="next-word-button" autofocus>Next Word</button>
-        <button id="retry-button">Retry</button>
+        <button id="next-word-button" autofocus disabled>Next Word</button>
+        <button id="retry-button" disabled>Retry</button>
         <!-- TODO consider the language used for the ids and names here. -->
         <form id="guess-form" name="guess-form">
             <label for="guess-input">Enter your guess here</label>
-            <input id="guess-input" name="guess" type="text" autocomplete="off" />
-            <button id="check-button" name="check" type="submit">Check</button>
+            <input id="guess-input" name="guess" type="text" autocomplete="off" disabled />
+            <button id="check-button" name="check" type="submit" disabled>Check</button>
         </form>
         <!-- FIXME currently using inline styles because I'm lazy and it's convenient -->
         <div id="success-indicator" style="display:none">Correct!</div>

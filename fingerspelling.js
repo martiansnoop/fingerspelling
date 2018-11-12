@@ -6,9 +6,24 @@
 // also would be fun to track all time vs this session
 //
 
-const words = ["foo", "bar", "baz"];
+let words = [];
+let currentWord;
+let loading = true;
 let intervalMillis = 1000;
-let currentWord = getRandomWord(words);
+
+// current word list is taken from here, with all 1 and 2 letter words removed:
+// https://github.com/first20hours/google-10000-english/blob/master/google-10000-english-usa.txt
+fetch("words.txt")
+    .then(response => response.text(), error => console.log("fetch error", error))
+    .then(file => {
+        words = file.split("\n");
+        currentWord = getRandomWord(words);
+        guessInput.disabled = false;
+        checkButton.disabled = false;
+        retryButton.disabled = false;
+        nextWordButton.disabled = false;
+        loading = false;
+    });
 
 const imagesByLetter = getImagesByLetter();
 const guessInput = document.getElementById("guess-input");
