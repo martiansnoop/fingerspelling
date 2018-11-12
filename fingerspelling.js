@@ -15,6 +15,8 @@ const startButton = document.getElementById("start-button");
 const guessInput = document.getElementById("guess-input");
 const checkButton = document.getElementById("check-button");
 const guessForm = document.getElementById("guess-form");
+const successIndicator = document.getElementById("success-indicator");
+const failureIndicator = document.getElementById("failure-indicator");
 
 startButton.focus();
 startButton.addEventListener("click", function(event) {
@@ -24,11 +26,13 @@ startButton.addEventListener("click", function(event) {
 guessForm.addEventListener("submit", function(event) {
     event.preventDefault();
     const guess = guessInput.value;
-    if (guess === currentWord) {
+    const success = guess.toLowerCase() === currentWord;
+    if (success) {
         console.log("Success!");
+        successIndicator.style.display = "block"
     } else {
         console.log("Try again.");
-        // move focus to a nextWord button.
+        failureIndicator.style.display = "block"
     }
 });
 
