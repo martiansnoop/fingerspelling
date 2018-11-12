@@ -11,17 +11,28 @@ let intervalMillis = 1000;
 let currentWord = getRandomWord(words);
 
 const imagesByLetter = getImagesByLetter();
-const startButton = document.getElementById("start-button");
 const guessInput = document.getElementById("guess-input");
 const checkButton = document.getElementById("check-button");
+const retryButton = document.getElementById("retry-button");
+const nextWordButton = document.getElementById("next-word-button");
 const guessForm = document.getElementById("guess-form");
 const successIndicator = document.getElementById("success-indicator");
 const failureIndicator = document.getElementById("failure-indicator");
 
-startButton.focus();
-startButton.addEventListener("click", function(event) {
+retryButton.addEventListener("click", function(event) {
+    successIndicator.style.display = "none";
+    failureIndicator.style.display = "none";
     displayWord(currentWord);
 });
+
+nextWordButton.addEventListener("click", function(event) {
+    successIndicator.style.display = "none";
+    failureIndicator.style.display = "none";
+    guessInput.value = "";
+    currentWord = getRandomWord(words);
+    displayWord(currentWord);
+});
+
 
 guessForm.addEventListener("submit", function(event) {
     event.preventDefault();
@@ -53,6 +64,10 @@ function displayWord(word) {
     const wrapper = document.getElementById("image-wrapper");
     displayLetter(0);
     function displayLetter(index) {
+        if (currentWord !== word) {
+            console.log("interrupted; canceling future letters for word", word);
+            return;
+        }
         console.log("displayLetter", index, letters[index]);
         const letter = letters[index];
         const newImg = imagesByLetter[letter];
@@ -69,7 +84,6 @@ function displayWord(word) {
             // use a timeout here too so user can see the last letter for the full interval
             setTimeout(() => guessInput.focus(), intervalMillis);
         }
-
     }
 }
 
