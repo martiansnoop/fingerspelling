@@ -92,15 +92,21 @@ function displayWord(word) {
             console.log("interrupted; canceling future letters for word", word);
             return;
         }
+        const doubleLetter = index > 0 && word[index] === word[index - 1];
         console.log("displayLetter", index, letters[index]);
         const letter = letters[index];
         const newImg = imagesByLetter[letter];
         if (wrapper.children.length > 0) {
-            wrapper.removeChild(wrapper.children[0]);
+            const child = wrapper.children[0];
+            child.style.paddingLeft = "0px";
+            wrapper.removeChild(child);
+        }
+        // add this padding after removing the previous block because the code
+        // makes one image tag per letter and reuses it.
+        if (doubleLetter) {
+            newImg.style.paddingLeft = "100px";
         }
         wrapper.appendChild(newImg);
-        // TODO in between removing the old image and inserting the new one,
-        // display something else so you can distinguish double letters.
         if (index < word.length - 1) {
             setTimeout(() => displayLetter(index+1), intervalMillis);
         } else {
