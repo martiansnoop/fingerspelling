@@ -16,9 +16,13 @@ const guessInput = document.getElementById("guess-input");
 const checkButton = document.getElementById("check-button");
 const retryButton = document.getElementById("retry-button");
 const nextWordButton = document.getElementById("next-word-button");
+const adjustSpeedForm = document.getElementById("adjust-speed-form");
+const adjustSpeedInput = document.getElementById("adjust-speed-input");
 const guessForm = document.getElementById("guess-form");
 const successIndicator = document.getElementById("success-indicator");
 const failureIndicator = document.getElementById("failure-indicator");
+
+adjustSpeedInput.value = intervalMillis;
 
 // current word list is taken from here, with all 1 and 2 letter words removed:
 // https://github.com/first20hours/google-10000-english/blob/master/google-10000-english-usa.txt
@@ -59,6 +63,12 @@ guessForm.addEventListener("submit", function(event) {
         console.log("Try again.");
         failureIndicator.style.display = "block"
     }
+});
+
+adjustSpeedForm.addEventListener("submit", function(event) {
+    event.preventDefault();
+    intervalMillis = adjustSpeedInput.value;
+    nextWordButton.focus();
 });
 
 function getImagesByLetter() {
