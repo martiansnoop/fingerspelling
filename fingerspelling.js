@@ -11,6 +11,15 @@ let currentWord;
 let loading = true;
 let intervalMillis = 1000;
 
+const imagesByLetter = getImagesByLetter();
+const guessInput = document.getElementById("guess-input");
+const checkButton = document.getElementById("check-button");
+const retryButton = document.getElementById("retry-button");
+const nextWordButton = document.getElementById("next-word-button");
+const guessForm = document.getElementById("guess-form");
+const successIndicator = document.getElementById("success-indicator");
+const failureIndicator = document.getElementById("failure-indicator");
+
 // current word list is taken from here, with all 1 and 2 letter words removed:
 // https://github.com/first20hours/google-10000-english/blob/master/google-10000-english-usa.txt
 fetch("words.txt")
@@ -24,15 +33,6 @@ fetch("words.txt")
         nextWordButton.disabled = false;
         loading = false;
     });
-
-const imagesByLetter = getImagesByLetter();
-const guessInput = document.getElementById("guess-input");
-const checkButton = document.getElementById("check-button");
-const retryButton = document.getElementById("retry-button");
-const nextWordButton = document.getElementById("next-word-button");
-const guessForm = document.getElementById("guess-form");
-const successIndicator = document.getElementById("success-indicator");
-const failureIndicator = document.getElementById("failure-indicator");
 
 retryButton.addEventListener("click", function(event) {
     successIndicator.style.display = "none";
