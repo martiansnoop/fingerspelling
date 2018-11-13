@@ -58,11 +58,11 @@ guessForm.addEventListener("submit", function(event) {
     const success = guess.toLowerCase() === currentWord;
     if (success) {
         console.log("Success!");
-        successIndicator.style.display = "block"
+        successIndicator.style.display = "inline"
         nextWordButton.focus();
     } else {
         console.log("Try again.");
-        failureIndicator.style.display = "block"
+        failureIndicator.style.display = "inline"
     }
 });
 
