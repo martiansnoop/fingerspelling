@@ -5,6 +5,12 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
     </head>
     <body>
+        <!-- TODO consider the language used for the ids and names here. -->
+        <form id="guess-form" name="guess-form">
+            <label for="guess-input">Enter guess:</label>
+            <input id="guess-input" name="guess" type="text" autocomplete="off" disabled />
+            <button id="check-button" name="check" type="submit" disabled>Check</button>
+        </form>
         <!-- FIXME inline styles -->
         <div id="image-wrapper" style="background-color:black"></div>
         <button id="next-word-button" autofocus disabled>Next Word</button>
@@ -12,12 +18,6 @@
         <!-- FIXME currently using inline styles because I'm lazy and it's convenient -->
         <span id="success-indicator" style="display:none;color:green;font-weight:bold">Correct!</span>
          <span id="failure-indicator" style="display:none;color:red;font-weight:bold">Try again.</span>
-        <!-- TODO consider the language used for the ids and names here. -->
-        <form id="guess-form" name="guess-form">
-            <label for="guess-input">Enter guess:</label>
-            <input id="guess-input" name="guess" type="text" autocomplete="off" disabled />
-            <button id="check-button" name="check" type="submit" disabled>Check</button>
-        </form>
         <form id="adjust-speed-form" name="adjust-speed-form">
             <label for="adjust-speed-input">Adjust Speed (millis):</label>
             <input id="adjust-speed-input" type="number" min="100" max="2000" step="100" />

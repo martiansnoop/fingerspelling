@@ -35,6 +35,7 @@ fetch("words.txt")
         checkButton.disabled = false;
         retryButton.disabled = false;
         nextWordButton.disabled = false;
+        nextWordButton.focus();
         loading = false;
     });
 
