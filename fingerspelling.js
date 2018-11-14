@@ -100,13 +100,15 @@ function displayWord(word) {
         const newImg = imagesByLetter[letter];
         if (wrapper.children.length > 0) {
             const child = wrapper.children[0];
-            child.style.paddingLeft = "0px";
             wrapper.removeChild(child);
+            wrapper.style.paddingRight = "50px"
+            wrapper.style.paddingLeft = "50px"
         }
         // add this padding after removing the previous block because the code
         // makes one image tag per letter and reuses it.
         if (doubleLetter) {
-            newImg.style.paddingLeft = "100px";
+            wrapper.style.paddingRight = "100px"
+            wrapper.style.paddingLeft = "0px";
         }
         wrapper.appendChild(newImg);
         if (index < word.length - 1) {
