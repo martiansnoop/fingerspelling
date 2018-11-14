@@ -25,13 +25,14 @@
             <input id="guess-input" name="guess" type="text" autocomplete="off" disabled />
             <button id="check-button" name="check" type="submit" disabled>Check</button>
         </form>
-        <!-- FIXME inline styles -->
-        <div id="image-wrapper" style="background-color:black"></div>
+        <hr/>
         <button id="next-word-button" autofocus disabled>Next Word</button>
         <button id="retry-button" disabled>Retry</button>
         <!-- FIXME currently using inline styles because I'm lazy and it's convenient -->
         <span id="success-indicator" style="display:none;color:green;font-weight:bold">Correct!</span>
          <span id="failure-indicator" style="display:none;color:red;font-weight:bold">Try again.</span>
+        <!-- FIXME inline styles -->
+        <div id="image-wrapper" style="background-color:black"></div>
          <hr /> 
         <form id="adjust-speed-form" name="adjust-speed-form">
             <label for="adjust-speed-input">Adjust Speed (millis):</label>
