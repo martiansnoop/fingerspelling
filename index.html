@@ -4,6 +4,9 @@
         <title>Fingerspelling Practice</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <style type="text/css">
+            main {
+                max-width: 500px;
+            }
             img {
                 max-width: 100%;
                 max-height: 100%;
@@ -19,27 +22,29 @@
         </style>
     </head>
     <body>
-        <!-- TODO consider the language used for the ids and names here. -->
-        <form id="guess-form" name="guess-form">
-            <label for="guess-input">Enter guess:</label>
-            <input id="guess-input" name="guess" type="text" autocomplete="off" disabled />
-            <button id="check-button" name="check" type="submit" disabled>Check</button>
-        </form>
-        <hr/>
-        <button id="next-word-button" autofocus disabled>Next Word</button>
-        <button id="retry-button" disabled>Retry</button>
-        <!-- FIXME currently using inline styles because I'm lazy and it's convenient -->
-        <span id="success-indicator" style="display:none;color:green;font-weight:bold">Correct!</span>
-         <span id="failure-indicator" style="display:none;color:red;font-weight:bold">Try again.</span>
-        <!-- FIXME inline styles -->
-        <div id="image-wrapper" style="background-color:black"></div>
-         <hr /> 
-        <form id="adjust-speed-form" name="adjust-speed-form">
-            <label for="adjust-speed-input">Adjust Speed (millis):</label>
-            <input id="adjust-speed-input" type="number" min="100" max="2000" step="100" />
-            <button id="adjust-speed-button" name="adjust-speed" type="submit">Update</button>
-        </form>
+        <main>
+            <!-- TODO consider the language used for the ids and names here. -->
+            <form id="guess-form" name="guess-form">
+                <label for="guess-input">Enter guess:</label>
+                <input id="guess-input" name="guess" type="text" autocomplete="off" disabled />
+                <button id="check-button" name="check" type="submit" disabled>Check</button>
+            </form>
+            <hr/>
+            <button id="next-word-button" autofocus disabled>Next Word</button>
+            <button id="retry-button" disabled>Retry</button>
+            <!-- FIXME currently using inline styles because I'm lazy and it's convenient -->
+            <span id="success-indicator" style="display:none;color:green;font-weight:bold">Correct!</span>
+            <span id="failure-indicator" style="display:none;color:red;font-weight:bold">Try again.</span>
+            <!-- FIXME inline styles -->
+            <div id="image-wrapper" style="background-color:black"></div>
+            <hr /> 
+            <form id="adjust-speed-form" name="adjust-speed-form">
+                <label for="adjust-speed-input">Adjust Speed (millis):</label>
+                <input id="adjust-speed-input" type="number" min="100" max="2000" step="100" />
+                <button id="adjust-speed-button" name="adjust-speed" type="submit">Update</button>
+            </form>
 
+        </main>
         <script type="text/javascript" src="fingerspelling.js"></script>
         <script type="text/javascript">
             if ("serviceWorker" in navigator) {
