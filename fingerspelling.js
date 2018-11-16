@@ -9,7 +9,7 @@
 let words = [];
 let currentWord;
 let loading = true;
-let intervalMillis = 500;
+let intervalMillis = 400;
 
 const imagesByLetter = getImagesByLetter();
 const guessInput = document.getElementById("guess-input");
