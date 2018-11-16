@@ -99,14 +99,14 @@ function displayWord(word) {
         if (wrapper.children.length > 0) {
             const child = wrapper.children[0];
             wrapper.removeChild(child);
-            wrapper.style.paddingRight = "50px"
-            wrapper.style.paddingLeft = "50px"
+            wrapper.classList.remove("double-letter");
+            wrapper.classList.add("single-letter");
         }
         // add this padding after removing the previous block because the code
         // makes one image tag per letter and reuses it.
         if (doubleLetter) {
-            wrapper.style.paddingRight = "100px"
-            wrapper.style.paddingLeft = "0px";
+            wrapper.classList.add("double-letter");
+            wrapper.classList.remove("single-letter");
         }
         wrapper.appendChild(newImg);
         if (index < word.length - 1) {

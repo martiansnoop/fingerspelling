@@ -18,10 +18,16 @@
                 width: 90%;
             }
             #image-wrapper {
-                padding-left: 50px;
-                padding-right: 50px;
 				background-color: black;
             }
+			.double-letter {
+				padding-right: 100px;
+				padding-left: 0px;
+			}
+			.single-letter {
+				padding-right: 50px;
+				padding-left: 50px;
+			}
 			/*
 				https://webaim.org/techniques/css/invisiblecontent/
 				The content of this app is not particularly accessible to screen readers,
@@ -50,8 +56,8 @@
             <!-- FIXME currently using inline styles because I'm lazy and it's convenient -->
             <span id="success-indicator" style="display:none;color:green;font-weight:bold">Correct!</span>
             <span id="failure-indicator" style="display:none;color:red;font-weight:bold">Try again.</span>
-            <div id="image-wrapper"></div>
-            <hr /> 
+            <div id="image-wrapper" class="single-letter"></div>
+            <hr />
             <form id="adjust-speed-form" name="adjust-speed-form">
                 <label for="adjust-speed-input">Adjust Speed (millis):</label>
                 <input id="adjust-speed-input" type="number" min="100" max="2000" step="100" />
