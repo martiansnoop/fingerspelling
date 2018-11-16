@@ -33,7 +33,7 @@
 				The content of this app is not particularly accessible to screen readers,
 				but I need the practice.
 			*/
-            .hidden {
+            .sr-only{
 				position:absolute;
 				left:-10000px;
 				top:auto;
@@ -47,7 +47,7 @@
 		<main>
 			<!-- TODO consider the language used for the ids and names here. -->
             <form id="guess-form" name="guess-form">
-                <label for="guess-input" class="hidden">Enter guess:</label>
+                <label for="guess-input" class="sr-only">Enter guess:</label>
                 <input id="guess-input" 
                        name="guess" 
                        type="text" 
