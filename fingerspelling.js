@@ -13,7 +13,6 @@ let intervalMillis = 500;
 
 const imagesByLetter = getImagesByLetter();
 const guessInput = document.getElementById("guess-input");
-const checkButton = document.getElementById("check-button");
 const retryButton = document.getElementById("retry-button");
 const nextWordButton = document.getElementById("next-word-button");
 const adjustSpeedForm = document.getElementById("adjust-speed-form");
@@ -32,7 +31,6 @@ fetch("words.txt")
         words = file.split("\n");
         currentWord = getRandomWord(words);
         guessInput.disabled = false;
-        checkButton.disabled = false;
         retryButton.disabled = false;
         nextWordButton.disabled = false;
         nextWordButton.focus();

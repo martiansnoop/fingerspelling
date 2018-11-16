@@ -14,19 +14,34 @@
             input, button {
                 padding: 10px;
             }
+            #guess-input {
+                width: 90%;
+            }
             #image-wrapper {
                 padding-left: 50px;
                 padding-right: 50px;
             }
-        </style>
-    </head>
-    <body>
-        <main>
-            <!-- TODO consider the language used for the ids and names here. -->
+			/*
+				https://webaim.org/techniques/css/invisiblecontent/
+				The content of this app is not particularly accessible to screen readers,
+				but I need the practice.
+			*/
+            .hidden {
+				position:absolute;
+				left:-10000px;
+				top:auto;
+				width:1px;
+				height:1px;
+				overflow:hidden;
+			}
+		</style>
+	</head>
+	<body>
+		<main>
+			<!-- TODO consider the language used for the ids and names here. -->
             <form id="guess-form" name="guess-form">
-                <label for="guess-input">Enter guess:</label>
-                <input id="guess-input" name="guess" type="text" autocomplete="off" disabled />
-                <button id="check-button" name="check" type="submit" disabled>Check</button>
+                <label for="guess-input" class="hidden">Enter guess:</label>
+                <input id="guess-input" name="guess" type="text" autocomplete="off" placeholder="Enter guess" disabled />
             </form>
             <hr/>
             <button id="next-word-button" autofocus disabled>Next Word</button>
