@@ -23,6 +23,7 @@
             }
             #image-wrapper {
 				background-color: black;
+				height: 100%;
             }
 			.double-letter {
 				padding-right: 100px;
@@ -32,6 +33,16 @@
 				padding-right: 50px;
 				padding-left: 50px;
 			}
+            .message {
+                height: 100%;
+                color: white;
+                background-color: black;
+            }
+            .flex-centered {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
 			/*
 				https://webaim.org/techniques/css/invisiblecontent/
 				The content of this app is not particularly accessible to screen readers,
@@ -44,6 +55,23 @@
 				width:1px;
 				height:1px;
 				overflow:hidden;
+			}
+            .hidden {
+                display:none;
+            }
+			.aspect-ratio-box {
+				height: 0;
+				overflow: hidden;
+				padding-top: 75%;
+				background: white;
+				position: relative;
+			}
+			.aspect-ratio-box-inside {
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
 			}
 		</style>
 	</head>
@@ -65,8 +93,14 @@
             <!-- FIXME currently using inline styles because I'm lazy and it's convenient -->
             <span id="success-indicator" style="display:none;color:green;font-weight:bold">Correct!</span>
             <span id="failure-indicator" style="display:none;color:red;font-weight:bold">Try again.</span>
-            <div id="image-wrapper" class="single-letter"></div>
-            <hr />
+			<div class="aspect-ratio-box">
+				<div class="aspect-ratio-box-inside">
+                    <div id="next-word-message" class="message flex-centered" tabindex="0">Next Word</div>
+                    <div id="retry-message" class="message flex-centered" tabindex="0">Retry</div>
+                    <div id="image-wrapper" class="single-letter flex-centered"></div>
+				</div>
+			</div>
+            <hr /> 
             <form id="adjust-speed-form" name="adjust-speed-form">
                 <label for="adjust-speed-input">Adjust Speed (millis):</label>
                 <input id="adjust-speed-input" type="number" min="100" max="2000" step="100" />
