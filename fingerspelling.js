@@ -46,7 +46,8 @@ retryButton.addEventListener("click", function(event) {
 });
 
 nextWordMessage.addEventListener("click", showNextWordHandler);
-nextWordButton.addEventListener("keydown", showNextWordHandlerEnterKey);
+nextWordMessage.addEventListener("keydown", showNextWordHandlerEnterKey);
+nextWordButton.addEventListener("click", showNextWordHandler);
 successMessage.addEventListener("click", showNextWordHandler);
 successMessage.addEventListener("keydown", showNextWordHandlerEnterKey);
 function showNextWordHandlerEnterKey(event) {
