@@ -35,7 +35,7 @@ fetch("words.txt")
         guessInput.disabled = false;
         retryButton.disabled = false;
         nextWordButton.disabled = false;
-        nextWordButton.focus();
+        nextWordMessage.focus();
         loading = false;
     });
 
