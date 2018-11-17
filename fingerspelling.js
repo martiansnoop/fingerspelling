@@ -72,7 +72,7 @@ guessForm.addEventListener("submit", function(event) {
         console.log("Success!");
         successMessage.classList.remove("hidden");
         imageWrapper.classList.add("hidden");
-    //    successMessage.focus();
+        setTimeout(() => successMessage.focus());
     } else {
         console.log("Try again.");
         failureIndicator.style.display = "inline"
