@@ -40,7 +40,6 @@ fetch("words.txt")
     });
 
 retryButton.addEventListener("click", function(event) {
-    successIndicator.style.display = "none";
     failureIndicator.style.display = "none";
     displayWord(currentWord);
 });
