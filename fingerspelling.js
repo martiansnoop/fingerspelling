@@ -12,13 +12,15 @@ let loading = true;
 let intervalMillis = 400;
 
 const imagesByLetter = getImagesByLetter();
+const imageWrapper = document.getElementById("image-wrapper");
 const guessInput = document.getElementById("guess-input");
 const retryButton = document.getElementById("retry-button");
 const nextWordButton = document.getElementById("next-word-button");
+const nextWordMessage = document.getElementById("next-word-message");
 const adjustSpeedForm = document.getElementById("adjust-speed-form");
 const adjustSpeedInput = document.getElementById("adjust-speed-input");
 const guessForm = document.getElementById("guess-form");
-const successIndicator = document.getElementById("success-indicator");
+const successMessage = document.getElementById("success-message");
 const failureIndicator = document.getElementById("failure-indicator");
 
 adjustSpeedInput.value = intervalMillis;
@@ -43,13 +45,24 @@ retryButton.addEventListener("click", function(event) {
     displayWord(currentWord);
 });
 
-nextWordButton.addEventListener("click", function(event) {
-    successIndicator.style.display = "none";
+nextWordMessage.addEventListener("click", showNextWordHandler);
+nextWordButton.addEventListener("keydown", showNextWordHandlerEnterKey);
+successMessage.addEventListener("click", showNextWordHandler);
+successMessage.addEventListener("keydown", showNextWordHandlerEnterKey);
+function showNextWordHandlerEnterKey(event) {
+    if (event.key === "Enter") {
+        showNextWordHandler(event);
+    }
+}
+function showNextWordHandler(event) {
     failureIndicator.style.display = "none";
+    nextWordMessage.classList.add("hidden")
+    successMessage.classList.add("hidden")
+    imageWrapper.classList.remove("hidden")
     guessInput.value = "";
     currentWord = getRandomWord(words);
     displayWord(currentWord);
-});
+}
 
 guessForm.addEventListener("submit", function(event) {
     event.preventDefault();
@@ -57,8 +70,9 @@ guessForm.addEventListener("submit", function(event) {
     const success = guess.toLowerCase() === currentWord;
     if (success) {
         console.log("Success!");
-        successIndicator.style.display = "inline"
-        nextWordButton.focus();
+        successMessage.classList.remove("hidden");
+        imageWrapper.classList.add("hidden");
+        successMessage.focus();
     } else {
         console.log("Try again.");
         failureIndicator.style.display = "inline"
