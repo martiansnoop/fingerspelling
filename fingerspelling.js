@@ -89,18 +89,6 @@ adjustSpeedForm.addEventListener("submit", function(event) {
     nextWordButton.focus();
 });
 
-function getImagesByLetter() {
-    const letters = "abcdefghijklmnopqrstuvwxyz".split("");
-    console.log("letters", letters);
-    const imagesByLetter = {};
-    for (letter of letters) {
-        const img = document.createElement("img");
-        img.src = `images/${letter}.gif`;
-        imagesByLetter[letter] = img;
-    }
-    return imagesByLetter;
-}
-
 function displayWord(word) {
     const letters = word.split("");
     const wrapper = document.getElementById("image-wrapper");
@@ -148,4 +136,15 @@ function getRandomWord(words) {
     return words[index];
 }
 
+function getImagesByLetter() {
+    const letters = "abcdefghijklmnopqrstuvwxyz".split("");
+    console.log("letters", letters);
+    const imagesByLetter = {};
+    for (letter of letters) {
+        const img = document.createElement("img");
+        img.src = `images/${letter}.gif`;
+        imagesByLetter[letter] = img;
+    }
+    return imagesByLetter;
+}
 
