@@ -41,6 +41,9 @@ fetch("words.txt")
 
 retryButton.addEventListener("click", function(event) {
     failureIndicator.style.display = "none";
+    nextWordMessage.classList.add("hidden");
+    successMessage.classList.add("hidden");
+    imageWrapper.classList.remove("hidden");
     displayWord(currentWord);
 });
 
@@ -71,6 +74,7 @@ guessForm.addEventListener("submit", function(event) {
     if (success) {
         console.log("Success!");
         successMessage.classList.remove("hidden");
+        nextWordMessage.classList.add("hidden");
         imageWrapper.classList.add("hidden");
         nextWordButton.focus()
     } else {
@@ -128,7 +132,11 @@ function displayWord(word) {
         } else {
             // The complete word has been displayed, so move focus to the guess input
             // use a timeout here too so user can see the last letter for the full interval
-            setTimeout(() => guessInput.focus(), intervalMillis);
+            setTimeout(() => {
+                guessInput.focus();
+                wrapper.classList.add("hidden");
+                nextWordMessage.classList.remove("hidden");
+            }, intervalMillis);
         }
     }
 }
