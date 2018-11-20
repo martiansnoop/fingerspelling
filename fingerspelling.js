@@ -1,7 +1,10 @@
+const defaultIntervalMillis = 500;
+const intervalKey = "intervalMillis";
+
 let words = [];
 let currentWord;
 let loading = true;
-let intervalMillis = 400;
+let intervalMillis = getIntervalMillis(); 
 
 const imagesByLetter = getImagesByLetter();
 const imageWrapper = document.getElementById("image-wrapper");
@@ -78,6 +81,7 @@ guessForm.addEventListener("submit", function(event) {
 adjustSpeedForm.addEventListener("submit", function(event) {
     event.preventDefault();
     intervalMillis = adjustSpeedInput.value;
+    localStorage.setItem(intervalKey, intervalMillis);
     nextWordButton.focus();
 });
 
@@ -140,3 +144,9 @@ function getImagesByLetter() {
     return imagesByLetter;
 }
 
+function getIntervalMillis() {
+    let num = parseInt(localStorage.getItem(intervalKey));
+    // note: Number.isNan doesn't work in IE so might want 
+    // a polyfill if I turn this into a real app
+    return Number.isNaN(num) ? defaultIntervalMillis : num;
+}
