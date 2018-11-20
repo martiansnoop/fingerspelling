@@ -16,7 +16,7 @@ const adjustSpeedForm = document.getElementById("adjust-speed-form");
 const adjustSpeedInput = document.getElementById("adjust-speed-input");
 const guessForm = document.getElementById("guess-form");
 const successMessage = document.getElementById("success-message");
-const failureIndicator = document.getElementById("failure-indicator");
+const retryMessage = document.getElementById("retry-message");
 
 adjustSpeedInput.value = intervalMillis;
 
@@ -34,13 +34,15 @@ fetch("words.txt")
         loading = false;
     });
 
-retryButton.addEventListener("click", function(event) {
-    failureIndicator.style.display = "none";
+retryButton.addEventListener("click", retryHandler);
+retryMessage.addEventListener("click", retryHandler);
+function retryHandler(event) {
     nextWordMessage.classList.add("hidden");
     successMessage.classList.add("hidden");
+    retryMessage.classList.add("hidden");
     imageWrapper.classList.remove("hidden");
     displayWord(currentWord);
-});
+}
 
 nextWordMessage.addEventListener("click", showNextWordHandler);
 nextWordMessage.addEventListener("keydown", showNextWordHandlerEnterKey);
@@ -53,9 +55,9 @@ function showNextWordHandlerEnterKey(event) {
     }
 }
 function showNextWordHandler(event) {
-    failureIndicator.style.display = "none";
     nextWordMessage.classList.add("hidden")
     successMessage.classList.add("hidden")
+    retryMessage.classList.add("hidden")
     imageWrapper.classList.remove("hidden")
     guessInput.value = "";
     currentWord = getRandomWord(words);
@@ -69,12 +71,17 @@ guessForm.addEventListener("submit", function(event) {
     if (success) {
         console.log("Success!");
         successMessage.classList.remove("hidden");
+        retryMessage.classList.add("hidden");
         nextWordMessage.classList.add("hidden");
         imageWrapper.classList.add("hidden");
         nextWordButton.focus()
     } else {
         console.log("Try again.");
-        failureIndicator.style.display = "inline"
+        retryMessage.classList.remove("hidden");
+        successMessage.classList.add("hidden");
+        nextWordMessage.classList.add("hidden");
+        imageWrapper.classList.add("hidden");
+        retryButton.focus();
     }
 });
 

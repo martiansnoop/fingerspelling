@@ -22,8 +22,6 @@
             <hr/>
             <button id="next-word-button" autofocus disabled>Next Word</button>
             <button id="retry-button" disabled>Retry</button>
-            <!-- FIXME currently using inline styles because I'm lazy and it's convenient -->
-            <span id="failure-indicator" style="display:none;color:red;font-weight:bold">Try again.</span>
 			<div class="aspect-ratio-box">
 				<div class="aspect-ratio-box-inside">
                     <div id="next-word-message" class="message flex-centered" tabindex="0">
@@ -44,7 +42,14 @@
                         <p style="font-weight:bold; color:green;">Correct!</p>
                         </div>
                     </div>
-                    <div id="retry-message" class="message flex-centered hidden" tabindex="0">Retry</div>
+                    <div id="retry-message" class="message flex-centered hidden" tabindex="0">
+                        <div class="flex-centered-vertical">
+                        <p class="emoji" role="image" aria-label="t-rex">
+                            🦖
+                        </p>
+                       Try again! 
+                        </div>
+                    </div>
                     <div id="image-wrapper" class="single-letter hidden"></div>
 				</div>
 			</div>
