@@ -126,7 +126,7 @@ function displayWord(word) {
             setTimeout(() => {
                 guessInput.focus();
                 wrapper.classList.add("hidden");
-                nextWordMessage.classList.remove("hidden");
+                retryMessage.classList.remove("hidden");
             }, intervalMillis);
         }
     }
