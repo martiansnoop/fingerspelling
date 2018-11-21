@@ -94,7 +94,6 @@ adjustSpeedForm.addEventListener("submit", function(event) {
 
 function displayWord(word) {
     const letters = word.split("");
-    const wrapper = document.getElementById("image-wrapper");
     displayLetter(0);
     function displayLetter(index) {
         if (currentWord !== word) {
@@ -104,34 +103,41 @@ function displayWord(word) {
         const doubleLetter = index > 0 && word[index] === word[index - 1];
         console.log("displayLetter", index, letters[index]);
         const letter = letters[index];
-        const newImg = imagesByLetter[letter];
-        if (wrapper.children.length > 0) {
-            const child = wrapper.children[0];
-            wrapper.removeChild(child);
-            wrapper.classList.remove("double-letter");
-            wrapper.classList.add("single-letter");
-        }
-        // add this padding after removing the previous block because the code
-        // makes one image tag per letter and reuses it.
-        if (doubleLetter) {
-            wrapper.classList.add("double-letter");
-            wrapper.classList.remove("single-letter");
-        }
-        wrapper.appendChild(newImg);
+        displayLetterImage(letter, doubleLetter);
+
         if (index < word.length - 1) {
             setTimeout(() => displayLetter(index+1), intervalMillis);
         } else {
-            // The complete word has been displayed, so move focus to the guess input
             // use a timeout here too so user can see the last letter for the full interval
-            setTimeout(() => {
-                guessInput.focus();
-                wrapper.classList.add("hidden");
-                retryMessage.classList.remove("hidden");
-            }, intervalMillis);
+            setTimeout(finishWord, intervalMillis);
         }
     }
 }
 
+function finishWord() {
+    // The complete word has been displayed, so move focus to the guess input
+    guessInput.focus();
+    wrapper.classList.add("hidden");
+    retryMessage.classList.remove("hidden");
+}
+
+function displayLetterImage(letter, doubleLetter) {
+    const newImg = imagesByLetter[letter];
+    const wrapper = document.getElementById("image-wrapper");
+    if (wrapper.children.length > 0) {
+        const child = wrapper.children[0];
+        wrapper.removeChild(child);
+        wrapper.classList.remove("double-letter");
+        wrapper.classList.add("single-letter");
+    }
+    // add this padding after removing the previous block because the code
+    // makes one image tag per letter and reuses it.
+    if (doubleLetter) {
+        wrapper.classList.add("double-letter");
+        wrapper.classList.remove("single-letter");
+    }
+    wrapper.appendChild(newImg);
+}
 
 function getRandomWord(words) {
     // TODO for fun, check if there's a crypto api for true random numbers
