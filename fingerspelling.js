@@ -26,26 +26,14 @@ fetch("words.txt")
     .then(response => response.text(), error => console.log("fetch error", error))
     .then(file => {
         words = file.split("\n");
-        guessInput.disabled = false;
-        retryButton.disabled = false;
-        nextWordButton.disabled = false;
-        nextWordButton.focus();
-
-        nextWordMessage.classList.remove("hidden");
-        successMessage.classList.add("hidden");
-        retryMessage.classList.add("hidden");
-        imageWrapper.classList.add("hidden");
-
+        transition("init");
         loading = false;
     });
 
 retryButton.addEventListener("click", retryHandler);
 retryMessage.addEventListener("click", retryHandler);
 function retryHandler(event) {
-    nextWordMessage.classList.add("hidden");
-    successMessage.classList.add("hidden");
-    retryMessage.classList.add("hidden");
-    imageWrapper.classList.remove("hidden");
+    transition("playing");
     displayWord(currentWord);
 }
 
@@ -60,10 +48,7 @@ function showNextWordHandlerEnterKey(event) {
     }
 }
 function showNextWordHandler(event) {
-    nextWordMessage.classList.add("hidden")
-    successMessage.classList.add("hidden")
-    retryMessage.classList.add("hidden")
-    imageWrapper.classList.remove("hidden")
+    transition("playing");
     guessInput.value = "";
     currentWord = getRandomWord(words);
     displayWord(currentWord);
@@ -75,18 +60,10 @@ guessForm.addEventListener("submit", function(event) {
     const success = guess.toLowerCase() === currentWord;
     if (success) {
         console.log("Success!");
-        successMessage.classList.remove("hidden");
-        retryMessage.classList.add("hidden");
-        nextWordMessage.classList.add("hidden");
-        imageWrapper.classList.add("hidden");
-        nextWordButton.focus()
+        transition("success");
     } else {
         console.log("Try again.");
-        retryMessage.classList.remove("hidden");
-        successMessage.classList.add("hidden");
-        nextWordMessage.classList.add("hidden");
-        imageWrapper.classList.add("hidden");
-        retryButton.focus();
+        transition("fail");
     }
 });
 
@@ -96,6 +73,53 @@ adjustSpeedForm.addEventListener("submit", function(event) {
     localStorage.setItem(intervalKey, intervalMillis);
     nextWordButton.focus();
 });
+
+function transition(state) {
+    switch (state) {
+        case "init":
+            successMessage.classList.add("hidden");
+            retryMessage.classList.add("hidden");
+            nextWordMessage.classList.remove("hidden");
+            imageWrapper.classList.add("hidden");
+
+            // TODO the  guess input and retry button should probably still be disabled
+            // but I don't want to think through that right now.
+            guessInput.disabled = false;
+            retryButton.disabled = false;
+            nextWordButton.disabled = false;
+            nextWordButton.focus();
+            break;
+        case "playing":
+            successMessage.classList.add("hidden");
+            retryMessage.classList.add("hidden");
+            nextWordMessage.classList.add("hidden");
+            imageWrapper.classList.remove("hidden");
+            break;
+        case "waiting":
+            successMessage.classList.add("hidden");
+            retryMessage.classList.remove("hidden");
+            nextWordMessage.classList.add("hidden");
+            imageWrapper.classList.add("hidden");
+            guessInput.focus();
+            break;
+        case "success":
+            successMessage.classList.remove("hidden");
+            retryMessage.classList.add("hidden");
+            nextWordMessage.classList.add("hidden");
+            imageWrapper.classList.add("hidden");
+            nextWordButton.focus()
+            break;
+        case "fail":
+            successMessage.classList.add("hidden");
+            retryMessage.classList.remove("hidden");
+            nextWordMessage.classList.add("hidden");
+            imageWrapper.classList.add("hidden");
+            retryButton.focus();
+            break;
+        default:
+            console.warn("unknown state", state);
+    }
+}
 
 function displayWord(word) {
     const letters = word.split("");
@@ -120,12 +144,7 @@ function displayWord(word) {
 }
 
 function finishWord() {
-    // The complete word has been displayed, so move focus to the guess input
-    guessInput.focus();
-    imageWrapper.classList.add("hidden");
-    retryMessage.classList.remove("hidden");
-    successMessage.classList.add("hidden");
-    nextWordMessage.classList.add("hidden");
+    transition("waiting");
 }
 
 function displayLetterImage(letter, doubleLetter) {
