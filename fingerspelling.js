@@ -26,11 +26,16 @@ fetch("words.txt")
     .then(response => response.text(), error => console.log("fetch error", error))
     .then(file => {
         words = file.split("\n");
-        currentWord = getRandomWord(words);
         guessInput.disabled = false;
         retryButton.disabled = false;
         nextWordButton.disabled = false;
-        nextWordMessage.focus();
+        nextWordButton.focus();
+
+        nextWordMessage.classList.remove("hidden");
+        successMessage.classList.add("hidden");
+        retryMessage.classList.add("hidden");
+        imageWrapper.classList.add("hidden");
+
         loading = false;
     });
 
@@ -117,8 +122,10 @@ function displayWord(word) {
 function finishWord() {
     // The complete word has been displayed, so move focus to the guess input
     guessInput.focus();
-    wrapper.classList.add("hidden");
+    imageWrapper.classList.add("hidden");
     retryMessage.classList.remove("hidden");
+    successMessage.classList.add("hidden");
+    nextWordMessage.classList.add("hidden");
 }
 
 function displayLetterImage(letter, doubleLetter) {
