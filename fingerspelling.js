@@ -128,8 +128,22 @@ function displayWord(word) {
 
 function getRandomWord(words) {
     // TODO for fun, check if there's a crypto api for true random numbers
-    const index = Math.floor(Math.random() * words.length);
+    const index = getRandomInt(words.length);
     return words[index];
+}
+
+// The actual maxRand differs by browser, so pick the lowest value, 2**32
+const maxRand = 2**32;
+function getRandomInt(n) {
+    const max = maxRand - (maxRand % n); // higest multiple of n that is < maxRand
+    let rand;
+    do {
+        // A random int in the range [0, 2**32) is not subject to modulo bias because 
+        // the maximum number of values Math.random() can produce is 2**32 or 2**64, 
+        // (differing by browser) and 2**32 divides both of those evenly.
+        rand = Math.floor(Math.random() * maxRand);
+    } while (rand > max); // try again if `n` does not divide `rand` cleanly
+    return rand % n;
 }
 
 function getImagesByLetter() {
