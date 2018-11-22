@@ -78,3 +78,19 @@ but I need the practice.
     height: 100%;
 }
 
+.control-button {
+    background-color: black;
+    font-size: 150%;
+    color: white;
+    border: black;
+}
+.control-button:hover {
+    background-color: #555555;
+}
+.control-button-container {
+    display: flex;
+    justify-content: space-between;
+
+    background-color: black; /* todo: don't mix layout and presentation like this */
+    margin-bottom: 3px; /* show the bottom of the focus ring */
+}
