@@ -24,30 +24,13 @@
             <button id="retry-button" disabled>Retry</button>
 			<div class="aspect-ratio-box">
 				<div class="aspect-ratio-box-inside">
-                    <div id="next-word-message" class="message flex-centered" tabindex="0">
+                    <div id="message-wrapper" class="message flex-centered" tabindex="0">
                         <div class="flex-centered-vertical">
                         <!-- TODO check these aria-labels. Not sure what they should convey -->
-                        <p class="emoji" role="image" aria-label="bicyclist">
-                            🚴
+                        <p id="message-emoji" class="emoji" role="image" aria-label="ghost">
+                            👻
                         </p>
-                        <p>Next Word</p>
-                        </div>
-                    </div>
-                    <div id="success-message" class="message flex-centered hidden" tabindex="0">
-                        <div class="flex-centered-vertical">
-                        <p class="emoji" role="image" aria-label="sunglasses">
-                            😎
-                        </p>
-                        <!-- FIXME inline styles -->
-                        <p style="font-weight:bold; color:green;">Correct!</p>
-                        </div>
-                    </div>
-                    <div id="retry-message" class="message flex-centered hidden" tabindex="0">
-                        <div class="flex-centered-vertical">
-                        <p class="emoji" role="image" aria-label="t-rex">
-                            🦖
-                        </p>
-                        Replay Current Word
+                        <p id="message-text">Loading...</p>
                         </div>
                     </div>
                     <div id="image-wrapper" class="single-letter hidden"></div>

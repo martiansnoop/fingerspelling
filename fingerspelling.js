@@ -1,22 +1,47 @@
 const defaultIntervalMillis = 500;
 const intervalKey = "intervalMillis";
+const messages = {
+    init: {
+        text: "Let's go!",
+        emoji: "🚴",
+        emojiText: "bicyclist",
+        clickAction: "next"
+    },
+    waiting: {
+        text: "Show me that again.",
+        emoji: "🦖",
+        emojiText: "t-rex",
+        clickAction: "retry"
+    },
+    success: {
+        text: "Success!",
+        emoji: "🎉",
+        emojiText: "party popper",
+        clickAction: "next"
+    },
+    tryAgain: {
+        text: "Close! Try again.",
+        emoji: "🤔",
+        emojiText: "confused face",
+        clickAction: "retry"
+    }
+};
 
 let words = [];
 let currentWord;
 let loading = true;
-let intervalMillis = getIntervalMillis(); 
+let intervalMillis = getIntervalMillis();
+let currentMessage = messages.init;
 
 const imagesByLetter = getImagesByLetter();
 const imageWrapper = document.getElementById("image-wrapper");
+const messageWrapper = document.getElementById("message-wrapper");
 const guessInput = document.getElementById("guess-input");
 const retryButton = document.getElementById("retry-button");
 const nextWordButton = document.getElementById("next-word-button");
-const nextWordMessage = document.getElementById("next-word-message");
 const adjustSpeedForm = document.getElementById("adjust-speed-form");
 const adjustSpeedInput = document.getElementById("adjust-speed-input");
 const guessForm = document.getElementById("guess-form");
-const successMessage = document.getElementById("success-message");
-const retryMessage = document.getElementById("retry-message");
 
 adjustSpeedInput.value = intervalMillis;
 
@@ -31,26 +56,36 @@ fetch("words.txt")
     });
 
 retryButton.addEventListener("click", retryHandler);
-retryMessage.addEventListener("click", retryHandler);
 function retryHandler(event) {
     transition("playing");
     displayWord(currentWord);
 }
 
-nextWordMessage.addEventListener("click", showNextWordHandler);
-nextWordMessage.addEventListener("keydown", showNextWordHandlerEnterKey);
 nextWordButton.addEventListener("click", showNextWordHandler);
-successMessage.addEventListener("click", showNextWordHandler);
-successMessage.addEventListener("keydown", showNextWordHandlerEnterKey);
-function showNextWordHandlerEnterKey(event) {
-    if (event.key === "Enter") {
-        showNextWordHandler(event);
-    }
-}
 function showNextWordHandler(event) {
     transition("playing");
     currentWord = getRandomWord(words);
     displayWord(currentWord);
+}
+
+messageWrapper.addEventListener("click", messageWrapperHandler);
+messageWrapper.addEventListener("keydown", messageWrapperHandlerEnterKey);
+function messageWrapperHandlerEnterKey(event) {
+    if (event.key === "Enter") {
+        messageWrapperHandler(event);
+    }
+}
+function messageWrapperHandler(event) {
+    switch(currentMessage.clickAction) {
+        case "next":
+            showNextWordHandler(event);
+            break;
+        case "retry":
+            retryHandler(event);
+            break;
+        default:
+            console.warn("unknown click action", currentMessage.clickAction);
+    }
 }
 
 guessForm.addEventListener("submit", function(event) {
@@ -73,12 +108,20 @@ adjustSpeedForm.addEventListener("submit", function(event) {
     nextWordButton.focus();
 });
 
+function displayMessage(message) {
+    currentMessage = message;
+    messageWrapper.classList.remove("hidden");
+    const emoji = messageWrapper.querySelector("#message-emoji");
+    const text = messageWrapper.querySelector("#message-text");
+    emoji.innerText = message.emoji;
+    emoji.setAttribute("aria-label", message.emojiText);
+    text.innerText = message.text;
+}
+
 function transition(state) {
     switch (state) {
         case "init":
-            successMessage.classList.add("hidden");
-            retryMessage.classList.add("hidden");
-            nextWordMessage.classList.remove("hidden");
+            displayMessage(messages.init);
             imageWrapper.classList.add("hidden");
 
             // TODO the  guess input and retry button should probably still be disabled
@@ -89,30 +132,22 @@ function transition(state) {
             nextWordButton.focus();
             break;
         case "playing":
-            successMessage.classList.add("hidden");
-            retryMessage.classList.add("hidden");
-            nextWordMessage.classList.add("hidden");
+            messageWrapper.classList.add("hidden");
             imageWrapper.classList.remove("hidden");
             guessInput.value = "";
             break;
         case "waiting":
-            successMessage.classList.add("hidden");
-            retryMessage.classList.remove("hidden");
-            nextWordMessage.classList.add("hidden");
+            displayMessage(messages.waiting);
             imageWrapper.classList.add("hidden");
             guessInput.focus();
             break;
         case "success":
-            successMessage.classList.remove("hidden");
-            retryMessage.classList.add("hidden");
-            nextWordMessage.classList.add("hidden");
+            displayMessage(messages.success);
             imageWrapper.classList.add("hidden");
             nextWordButton.focus()
             break;
         case "fail":
-            successMessage.classList.add("hidden");
-            retryMessage.classList.remove("hidden");
-            nextWordMessage.classList.add("hidden");
+            displayMessage(messages.tryAgain);
             imageWrapper.classList.add("hidden");
             retryButton.focus();
             break;
@@ -177,8 +212,8 @@ function getRandomInt(n) {
     const max = maxRand - (maxRand % n); // higest multiple of n that is < maxRand
     let rand;
     do {
-        // A random int in the range [0, 2**32) is not subject to modulo bias because 
-        // the maximum number of values Math.random() can produce is 2**32 or 2**64, 
+        // A random int in the range [0, 2**32) is not subject to modulo bias because
+        // the maximum number of values Math.random() can produce is 2**32 or 2**64,
         // (differing by browser) and 2**32 divides both of those evenly.
         rand = Math.floor(Math.random() * maxRand);
     } while (rand > max); // try again if `n` does not divide `rand` cleanly
@@ -199,7 +234,7 @@ function getImagesByLetter() {
 
 function getIntervalMillis() {
     let num = parseInt(localStorage.getItem(intervalKey));
-    // note: Number.isNan doesn't work in IE so might want 
+    // note: Number.isNan doesn't work in IE so might want
     // a polyfill if I turn this into a real app
     return Number.isNaN(num) ? defaultIntervalMillis : num;
 }
