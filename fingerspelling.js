@@ -49,7 +49,6 @@ function showNextWordHandlerEnterKey(event) {
 }
 function showNextWordHandler(event) {
     transition("playing");
-    guessInput.value = "";
     currentWord = getRandomWord(words);
     displayWord(currentWord);
 }
@@ -94,6 +93,7 @@ function transition(state) {
             retryMessage.classList.add("hidden");
             nextWordMessage.classList.add("hidden");
             imageWrapper.classList.remove("hidden");
+            guessInput.value = "";
             break;
         case "waiting":
             successMessage.classList.add("hidden");
