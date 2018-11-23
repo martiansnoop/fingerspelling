@@ -9,7 +9,7 @@
 	<body>
 		<main>
 			<!-- TODO consider the language used for the ids and names here. -->
-            <form id="guess-form" name="guess-form">
+            <form id="guess-form" class="guess-form" name="guess-form">
                 <label for="guess-input" class="sr-only">Enter guess:</label>
                 <input id="guess-input" 
                        name="guess" 
@@ -18,8 +18,8 @@
                        autocapitalize="off" 
                        placeholder="Enter guess" 
                        disabled />
+                <button type="submit" name="submit-guess">Submit</button>
             </form>
-            <hr/>
             <div class="control-button-container">
                 <button id="retry-button" class="control-button" disabled>Retry</button>
                 <button id="next-word-button" class="control-button" autofocus disabled>Next</button>

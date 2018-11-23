@@ -1,5 +1,6 @@
 body {
     font-family: sans-serif;
+    background-color: #DCDCDC;
 }
 main {
     max-width: 500px;
@@ -10,9 +11,36 @@ img {
 }
 input, button {
     padding: 10px;
+    font-size: 150%;
 }
-#guess-input {
-    width: 90%;
+input {
+    border: 1px solid;
+    color: black;
+    background-color: #DCDCDC;
+}
+button {
+    background-color: black;
+    font-size: 150%;
+    color: #DCDCDC;
+    border: black;
+}
+button:hover {
+    background-color: #555555;
+}
+.guess-form {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 3px;
+}
+.guess-form input {
+    flex-grow: 1;
+}
+.control-button-container {
+    display: flex;
+    justify-content: space-between;
+
+    background-color: black; /* todo: don't mix layout and presentation like this */
+    margin-bottom: 3px; /* show the bottom of the focus ring */
 }
 #image-wrapper {
     background-color: black;
@@ -28,7 +56,7 @@ input, button {
 }
 .message {
     height: 100%;
-    color: white;
+    color: #DCDCDC;
     background-color: black;
     font-size: 150%;
 }
@@ -67,7 +95,6 @@ but I need the practice.
     height: 0;
     overflow: hidden;
     padding-top: 75%;
-    background: white;
     position: relative;
 }
 .aspect-ratio-box-inside {
@@ -78,19 +105,3 @@ but I need the practice.
     height: 100%;
 }
 
-.control-button {
-    background-color: black;
-    font-size: 150%;
-    color: white;
-    border: black;
-}
-.control-button:hover {
-    background-color: #555555;
-}
-.control-button-container {
-    display: flex;
-    justify-content: space-between;
-
-    background-color: black; /* todo: don't mix layout and presentation like this */
-    margin-bottom: 3px; /* show the bottom of the focus ring */
-}
