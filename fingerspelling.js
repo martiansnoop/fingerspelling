@@ -164,7 +164,7 @@ function displayWord(word) {
     displayLetter(0);
     function displayLetter(index) {
         if (myId !== id) {
-            console.log("interrupted; canceling future letters for word", word);
+            console.log("interrupted; canceling future letters for word/id", word, myId);
             return;
         }
         const doubleLetter = index > 0 && word[index] === word[index - 1];
