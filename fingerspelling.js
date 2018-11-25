@@ -55,6 +55,7 @@ fetch("words.txt")
         loading = false;
     });
 
+imageWrapper.addEventListener("click", retryHandler);
 retryButton.addEventListener("click", retryHandler);
 function retryHandler(event) {
     transition("playing");
