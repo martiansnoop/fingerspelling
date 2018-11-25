@@ -156,11 +156,13 @@ function transition(state) {
     }
 }
 
+let id = 0;
 function displayWord(word) {
     const letters = word.split("");
+    const myId = ++id;
     displayLetter(0);
     function displayLetter(index) {
-        if (currentWord !== word) {
+        if (myId !== id) {
             console.log("interrupted; canceling future letters for word", word);
             return;
         }
