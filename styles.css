@@ -28,22 +28,22 @@ button:hover {
 button[disabled]:hover {
     background-color: #DCDCDC;
 }
-button.submit-guess {
+button.submit-answer {
     background-color: black;
     color: #DCDCDC;
 }
-button.submit-guess:hover {
+button.submit-answer:hover {
     background-color: #555555;
 }
-button.submit-guess[disabled]:hover {
+button.submit-answer[disabled]:hover {
     background-color: black;
 }
-.guess-form {
+.answer-form {
     display: flex;
     justify-content: space-between;
     margin-bottom: 3px;
 }
-.guess-form input {
+.answer-form input {
     flex-grow: 1;
 }
 .control-button-container {

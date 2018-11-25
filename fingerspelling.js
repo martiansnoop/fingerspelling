@@ -36,13 +36,13 @@ let currentMessage = messages.init;
 const imagesByLetter = getImagesByLetter();
 const imageWrapper = document.getElementById("image-wrapper");
 const messageWrapper = document.getElementById("message-wrapper");
-const guessInput = document.getElementById("guess-input");
+const answerInput = document.getElementById("answer-input");
 const retryButton = document.getElementById("retry-button");
 const nextWordButton = document.getElementById("next-word-button");
 const adjustSpeedForm = document.getElementById("adjust-speed-form");
 const adjustSpeedInput = document.getElementById("adjust-speed-input");
-const guessForm = document.getElementById("guess-form");
-const submitGuessInput = document.getElementById("submit-guess");
+const answerForm = document.getElementById("answer-form");
+const submitAnswerInput = document.getElementById("submit-answer");
 
 adjustSpeedInput.value = intervalMillis;
 
@@ -90,10 +90,10 @@ function messageWrapperHandler(event) {
     }
 }
 
-guessForm.addEventListener("submit", function(event) {
+answerForm.addEventListener("submit", function(event) {
     event.preventDefault();
-    const guess = guessInput.value;
-    const success = guess.toLowerCase() === currentWord;
+    const answer = answerInput.value;
+    const success = answer.toLowerCase() === currentWord;
     if (success) {
         console.log("Success!");
         transition("success");
@@ -130,20 +130,20 @@ function transition(state) {
             nextWordButton.focus();
             break;
         case "playing":
-            // guess and retry start out as disabled, so need to enable them
+            // answer and retry start out as disabled, so need to enable them
             // the first time a word plays.
-            guessInput.disabled = false;
-            submitGuessInput.disabled = false;
+            answerInput.disabled = false;
+            submitAnswerInput.disabled = false;
             retryButton.disabled = false;
 
             messageWrapper.classList.add("hidden");
             imageWrapper.classList.remove("hidden");
-            guessInput.value = "";
+            answerInput.value = "";
             break;
         case "waiting":
             displayMessage(messages.waiting);
             imageWrapper.classList.add("hidden");
-            guessInput.focus();
+            answerInput.focus();
             break;
         case "success":
             displayMessage(messages.success);
