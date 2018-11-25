@@ -12,19 +12,24 @@ img {
 input, button {
     padding: 10px;
     font-size: 150%;
+    border: 2px solid black;
 }
 input {
-    border: 1px solid;
     color: black;
     background-color: #DCDCDC;
 }
 button {
-    background-color: black;
-    font-size: 150%;
-    color: #DCDCDC;
-    border: black;
+    background-color: #DCDCDC;
+    color: black;
 }
 button:hover {
+    background-color: #CCCCCC;
+}
+button.submit-guess {
+    background-color: black;
+    color: #DCDCDC;
+}
+button.submit-guess:hover {
     background-color: #555555;
 }
 .guess-form {
@@ -39,7 +44,6 @@ button:hover {
     display: flex;
     justify-content: space-between;
 
-    background-color: black; /* todo: don't mix layout and presentation like this */
     margin-bottom: 3px; /* show the bottom of the focus ring */
 }
 #image-wrapper {
