@@ -42,6 +42,7 @@ const nextWordButton = document.getElementById("next-word-button");
 const adjustSpeedForm = document.getElementById("adjust-speed-form");
 const adjustSpeedInput = document.getElementById("adjust-speed-input");
 const guessForm = document.getElementById("guess-form");
+const submitGuessInput = document.getElementById("submit-guess");
 
 adjustSpeedInput.value = intervalMillis;
 
@@ -125,14 +126,16 @@ function transition(state) {
             displayMessage(messages.init);
             imageWrapper.classList.add("hidden");
 
-            // TODO the  guess input and retry button should probably still be disabled
-            // but I don't want to think through that right now.
-            guessInput.disabled = false;
-            retryButton.disabled = false;
             nextWordButton.disabled = false;
             nextWordButton.focus();
             break;
         case "playing":
+            // guess and retry start out as disabled, so need to enable them
+            // the first time a word plays.
+            guessInput.disabled = false;
+            submitGuessInput.disabled = false;
+            retryButton.disabled = false;
+
             messageWrapper.classList.add("hidden");
             imageWrapper.classList.remove("hidden");
             guessInput.value = "";

@@ -25,12 +25,18 @@ button {
 button:hover {
     background-color: #CCCCCC;
 }
+button[disabled]:hover {
+    background-color: #DCDCDC;
+}
 button.submit-guess {
     background-color: black;
     color: #DCDCDC;
 }
 button.submit-guess:hover {
     background-color: #555555;
+}
+button.submit-guess[disabled]:hover {
+    background-color: black;
 }
 .guess-form {
     display: flex;
