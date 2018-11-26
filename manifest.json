@@ -3,8 +3,8 @@
     "name": "ASL Fingerspelling Practice",
     "icons": [
         {
-            "src": "/images/a-192.gif",
-            "type": "image/gif",
+            "src": "/images/a-192.png",
+            "type": "image/png",
             "sizes": "192x192"
         },
         {
