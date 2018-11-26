@@ -1,0 +1,21 @@
+{
+    "short_name": "ASL",
+    "name": "ASL Fingerspelling Practice",
+    "icons": [
+        {
+            "src": "/images/a-192.gif",
+            "type": "image/gif",
+            "sizes": "192x192"
+        },
+        {
+            "src": "/images/a.gif",
+            "type": "image/gif",
+            "sizes": "512x512"
+        }
+    ],
+    "start_url": "/fingerspelling",
+    "background_color": "#000000",
+    "display": "standalone",
+    "scope": "/fingerspelling/",
+    "theme_color": "#000000"
+}
