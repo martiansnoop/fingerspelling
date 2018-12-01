@@ -13,6 +13,12 @@ const messages = {
         emojiText: "t-rex",
         clickAction: "retry"
     },
+    answering: {
+        text: "Submit answer!",
+        emoji: "🚀",
+        emojiText: "rocket",
+        clickAction: "answer",
+    },
     success: {
         text: "Success!",
         emoji: "🎉",
@@ -85,12 +91,16 @@ function messageWrapperHandler(event) {
         case "retry":
             retryHandler(event);
             break;
+        case "answer":
+            answerHandler(event);
+            break;
         default:
             console.warn("unknown click action", currentMessage.clickAction);
     }
 }
 
-answerForm.addEventListener("submit", function(event) {
+answerForm.addEventListener("submit", answerHandler);
+function answerHandler(event) {
     event.preventDefault();
     const answer = answerInput.value;
     const success = answer.toLowerCase() === currentWord;
@@ -100,6 +110,17 @@ answerForm.addEventListener("submit", function(event) {
     } else {
         console.log("Try again.");
         transition("fail");
+    }
+}
+
+answerInput.addEventListener("keydown", function(event) {
+    console.log("keydown happened");
+    if (answerInput.value && answerInput.value.length === 1) {
+        transition("answering");
+    } else if (answerInput.value && answerInput.value.length === 0) {
+        // Go back to waiting if user clears the input. Not sure this is going to
+        // be used, so might remove it.
+        transition("waiting");
     }
 });
 
@@ -144,6 +165,10 @@ function transition(state) {
             displayMessage(messages.waiting);
             imageWrapper.classList.add("hidden");
             answerInput.focus();
+            break;
+        case "answering":
+            displayMessage(messages.answering);
+            imageWrapper.classList.add("hidden");
             break;
         case "success":
             displayMessage(messages.success);
