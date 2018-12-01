@@ -113,8 +113,8 @@ function answerHandler(event) {
     }
 }
 
-answerInput.addEventListener("keydown", function(event) {
-    console.log("keydown happened");
+// listen to keyup here so the change has been applied to answerInput.value
+answerInput.addEventListener("keyup", function(event) {
     if (answerInput.value && answerInput.value.length === 1) {
         transition("answering");
     } else if (answerInput.value && answerInput.value.length === 0) {
