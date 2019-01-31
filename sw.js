@@ -1,5 +1,5 @@
-const cacheName = "cache-v1";
-const urlsToCache = [
+const assetCache = "cache-v1";
+const assetUrls = [
     "words.txt",
 	"images/a.gif",
 	"images/b.gif",
@@ -29,22 +29,53 @@ const urlsToCache = [
 	"images/z.gif"
 ];
 
+const appShellCache = "app-shell-cache-v1";
+const appShellUrls = [
+    "styles.css",
+    "fingerspelling.js",
+    "/"
+];
+
+const cacheNames = [assetCache, appShellCache];
+const cacheUrlsByName = {
+    [assetCache]: assetUrls,
+    [appShellCache]: appShellUrls
+};
+
 self.addEventListener("install", function(event) {
+    console.log("sw install");
 	event.waitUntil(
-		caches.open(cacheName)
-			.then(cache => {
-				return cache.addAll(urlsToCache);	
-			})
+	    Promise.all(
+	        cacheNames.map(name => {
+                return caches.open(name)
+                    .then(cache => cache.addAll(cacheUrlsByName[name]));
+	        })
+	    )
 	);
 });
+
+self.addEventListener("activate", function(event) {
+    console.log("sw activate");
+    event.waitUntil(
+        caches.keys().then(function(cacheNames) {
+            return Promise.all(
+                cacheNames
+                        .filter(name => !cacheNames.includes(name))
+                        .map(name => caches.delete(name))
+            );
+        })
+    );
+})
 
 self.addEventListener("fetch", function(event) {
 	event.respondWith(
 		caches.match(event.request)
 			.then(function(response) {
                 if (response) {
+                    console.log("cached response for", event.request );
                     return response;
                 }				
+                console.log("going to network for", event.request);
                 return fetch(event.request);
 			})
 	);
