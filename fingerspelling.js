@@ -35,7 +35,6 @@ const messages = {
 
 let words = [];
 let currentWord;
-let loading = true;
 let intervalMillis = getIntervalMillis();
 let currentMessage = messages.init;
 
@@ -59,18 +58,17 @@ fetch("words.txt")
     .then(file => {
         words = file.split("\n");
         transition("init");
-        loading = false;
     });
 
 imageWrapper.addEventListener("click", retryHandler);
 retryButton.addEventListener("click", retryHandler);
-function retryHandler(event) {
+function retryHandler() {
     transition("playing");
     displayWord(currentWord);
 }
 
 nextWordButton.addEventListener("click", showNextWordHandler);
-function showNextWordHandler(event) {
+function showNextWordHandler() {
     transition("playing");
     currentWord = getRandomWord(words);
     displayWord(currentWord);
@@ -114,7 +112,7 @@ function answerHandler(event) {
 }
 
 // listen to keyup here so the change has been applied to answerInput.value
-answerInput.addEventListener("keyup", function(event) {
+answerInput.addEventListener("keyup", function() {
     if (answerInput.value && answerInput.value.length === 1) {
         transition("answering");
     } else if (answerInput.value && answerInput.value.length === 0) {
@@ -173,7 +171,7 @@ function transition(state) {
         case "success":
             displayMessage(messages.success);
             imageWrapper.classList.add("hidden");
-            nextWordButton.focus()
+            nextWordButton.focus();
             break;
         case "fail":
             displayMessage(messages.tryAgain);
@@ -255,7 +253,7 @@ function getImagesByLetter() {
     const letters = "abcdefghijklmnopqrstuvwxyz".split("");
     console.log("letters", letters);
     const imagesByLetter = {};
-    for (letter of letters) {
+    for (let letter of letters) {
         const img = document.createElement("img");
         img.src = `images/${letter}.gif`;
         imagesByLetter[letter] = img;
