@@ -202,13 +202,9 @@ function displayWord(word) {
             setTimeout(() => displayLetter(index+1), intervalMillis);
         } else {
             // use a timeout here too so user can see the last letter for the full interval
-            setTimeout(finishWord, intervalMillis);
+            setTimeout(() => transition("waiting"), intervalMillis);
         }
     }
-}
-
-function finishWord() {
-    transition("waiting");
 }
 
 function displayLetterImage(letter, doubleLetter) {
