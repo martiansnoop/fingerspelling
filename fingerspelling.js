@@ -64,14 +64,12 @@ imageWrapper.addEventListener("click", retryHandler);
 retryButton.addEventListener("click", retryHandler);
 function retryHandler() {
     transition("playing");
-    displayWord(currentWord);
 }
 
 nextWordButton.addEventListener("click", showNextWordHandler);
 function showNextWordHandler() {
-    transition("playing");
     currentWord = getRandomWord(words);
-    displayWord(currentWord);
+    transition("playing");
 }
 
 messageWrapper.addEventListener("click", messageWrapperHandler);
@@ -158,6 +156,8 @@ function transition(state) {
             messageWrapper.classList.add("hidden");
             imageWrapper.classList.remove("hidden");
             answerInput.value = "";
+
+            displayWord(currentWord);
             break;
         case "waiting":
             displayMessage(messages.waiting);
